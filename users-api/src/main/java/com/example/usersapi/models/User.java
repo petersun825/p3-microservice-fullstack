@@ -1,23 +1,24 @@
 package com.example.usersapi.models;
 
 import lombok.*;
-
+import lombok.Setter;
 import javax.persistence.*;
-
+import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Builder
-@Table(name = "USERS")
+@Entity @Table(name = "USERS")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @Column(name = "SAVED_REQUESTS")
+//    private ArrayList<String>requestIds;
 
     @Column(name = "USER_NAME")
     private String userName;
@@ -32,5 +33,6 @@ public class User {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
+//        this.requestIds = new ArrayList<String>();
     }
 }
