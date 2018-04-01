@@ -65,9 +65,10 @@ public class CityController {
         }
 
 
-        cityFromDb.setDescription(cityRequest.Title));
-        cityFromDb.setLastName(cityRequest.getLastName());
-
+        cityFromDb.setTitle(cityRequest.getShort_Title());
+        cityFromDb.setAgency(cityRequest.getAgency_Name());
+        cityFromDb.setRequest(cityRequest.getRequest_Id());
+        cityFromDb.setSection(cityRequest.getSection_Name());
         return cityRepository.save(cityFromDb);
     }
 
