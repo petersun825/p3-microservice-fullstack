@@ -1,8 +1,8 @@
 package com.example.cityapi.controllers;
 
 
-import com.example.cityapi.models.User;
-import com.example.cityapi.repositories.UserRepository;
+import com.example.cityapi.models.City;
+import com.example.cityapi.repositories.CityRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -22,13 +22,13 @@ public class CityController {
     private CityController cityRepository;
 
     @GetMapping("/")
-    public Iterable<User> findAllCity() {
+    public Iterable<City> findAllCity() {
         return cityRepository.findAll();
     }
 
     @GetMapping("/{cityId}")
-    public User findUserById(@PathVariable Long cityId) throws NotFoundException {
-        User foundCity = userRepository.findOne(cityId);
+    public City findCityById(@PathVariable Long cityId) throws NotFoundException {
+        City foundCity = cityRepository.findOne(cityId);
         if (foundCity == null) {
             throw new NotFoundException("City with ID of " + cityId + " was not found!");
         }
@@ -46,20 +46,33 @@ public class CityController {
 //    }
 
     @DeleteMapping("/{cityId}")
-    public HttpStatus deleteUserById(@PathVariable Long userId) throws EmptyResultDataAccessException {
-        userRepository.delete(userId);
+    public HttpStatus deleteCityById(@PathVariable Long cityId) throws EmptyResultDataAccessException {
+        cityRepository.delete(cityId);
         return HttpStatus.OK;
     }
 
     @PostMapping("/")
-    public User createNewCity(@RequestBody User newUser) {
+    public City createNewCity(@RequestBody City newCity) {
         return cityRepository.save(newCity);
     }
 
+    @PatchMapping("/{cityId}")
+    public City updateCityById(@PathVariable Long cityId, @RequestBody City cityRequest) throws NotFoundException {
+        City cityFromDb = CityRepository.findOne(cityId);
 
+        if (cityFromDb == null) {
+            throw new NotFoundException("City with ID of " + cityId + " was not found!");
+        }
+
+
+        cityFromDb.setDescription(cityRequest.Title));
+        cityFromDb.setLastName(cityRequest.getLastName());
+
+        return cityRepository.save(cityFromDb);
+    }
 
     @ExceptionHandler
-    void handleUserNotFound(
+    void handleCityNotFound(
             NotFoundException exception,
             HttpServletResponse response) throws IOException {
 

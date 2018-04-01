@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableEurekaClient
 @RestController
-public interface CityRepository extends CrudRepository<User, Long> {
+public interface CityRepository extends CrudRepository<City, Long> {
 
 }
