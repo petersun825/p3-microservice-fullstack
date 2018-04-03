@@ -25,24 +25,24 @@ services:
       environment:
         - GRADLE_USER_HOME=cache
         - SPRING_PROFILES_ACTIVE=dev
-  users-api:
-      image: anapsix/alpine-java:8_jdk_unlimited
-      ports:
-        - '8081:8081'
-      working_dir: /users-api
-      volumes:
-        - ./users-api:/users-api:cached
-      depends_on:
-        - postgresdev
-        - eureka
-      command: './gradlew bootRun'
-      environment:
-        - GRADLE_USER_HOME=cache
-        - SPRING_PROFILES_ACTIVE=dev
+#  users-api:
+#      image: anapsix/alpine-java:8_jdk_unlimited
+#      ports:
+#        - '8081:8081'
+#      working_dir: /users-api
+#      volumes:
+#        - ./users-api:/users-api:cached
+#      depends_on:
+#        - postgresdev
+#        - eureka
+#      command: './gradlew bootRun'
+#      environment:
+#        - GRADLE_USER_HOME=cache
+#        - SPRING_PROFILES_ACTIVE=dev
   city-api:
       image: anapsix/alpine-java:8_jdk_unlimited
       ports:
-        - '8082:8082'
+        - '8081:8081'
       working_dir: /city-api
       volumes:
         - ./users-api:/city-api:cached
