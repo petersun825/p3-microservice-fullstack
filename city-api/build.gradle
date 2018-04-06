@@ -46,43 +46,17 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-//dockerCompose {
-//	useComposeFiles = ['docker-compose.test.yml']
-//}
+test {
+	dependsOn cleanTest
 
-//task waitForCityAPI(type: Exec) {
-//	commandLine './wait-for-api.sh','http://localhost:8080/city', 'City API'
-//}
-//
-//
-//
-//task runRetailersAPITests(type: Exec) {
-//	workingDir './city-api'
-//	commandLine './gradlew', 'test'
-//}
-//
-//task allTests(type: Test) {
-//	dependsOn cleanTest
-//	dependsOn waitForCityAPI
-//	dependsOn runCityAPITests
-//
-//
-//	testLogging {
-//		exceptionFormat "full"
-//		events "skipped", "passed", "failed"
-//		displayGranularity 2
-//	}
-//}
-//
-//test {
-//	dependsOn cleanTest
-//	dependsOn waitForCityAPI
-//
-//	testLogging {
-//		exceptionFormat "full"
-//		events "skipped", "passed", "failed"
-//		displayGranularity 2
-//	}
-//}
-//
-//dockerCompose.isRequiredBy(allTests)
+	testLogging {
+		exceptionFormat "full"
+		events "skipped", "passed", "failed"
+		displayGranularity 2
+	}
+}
+
+dockerCompose {
+	useComposeFiles = ['docker-compose.test.yml']
+}
+dockerCompose.isRequiredBy(test)

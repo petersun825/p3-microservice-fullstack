@@ -1,7 +1,7 @@
 package com.example.microservicesandtesting.features;
 
-import com.example.microservicesandtesting.models.User;
-import com.example.microservicesandtesting.repostitories.UserRepository;
+import com.example.microservicesandtesting.models.City;
+import com.example.microservicesandtesting.repostitories.CityRepository;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,95 +22,98 @@ import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class UsersApiFeatureTest {
+public class CitysApiFeatureTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private CityRepository cityRepository;
 
     @Before
     public void setUp() {
-        userRepository.deleteAll();
+        cityRepository.deleteAll();
     }
 
     @After
     public void tearDown() {
-        userRepository.deleteAll();
+        cityRepository.deleteAll();
     }
 
     @Test
-    public void shouldAllowFullCrudForAUser() throws Exception {
-        User firstUser = new User(
-                "someone",
-                "Ima",
-                "Person"
+    public void shouldAllowFullCrudForACity() throws Exception {
+        City firstCity = new City(
+                "Officer",
+                "Fire Department",
+                "41241",
+                "somewhere"
         );
 
-        User secondUser = new User(
-                "someone_else",
-                "Someone",
-                "Else"
+        City secondCity = new City(
+                "Libarian",
+                "Police Department",
+                "13245",
+                "somewhere else"
         );
 
-        Stream.of(firstUser, secondUser)
-                .forEach(user -> {
-                    userRepository.save(user);
+        Stream.of(firstCity, secondCity)
+                .forEach(city -> {
+                    cityRepository.save(city);
                 });
 
         when()
-                .get("http://localhost:8080/users/")
+                .get("http://localhost:8080/citys/")
                 .then()
                 .statusCode(is(200))
                 .and().body(containsString("someone"))
                 .and().body(containsString("Else"));
 
-        // Test creating a User
-        User userNotYetInDb = new User(
-                "new_user",
-                "Not",
-                "Yet Created"
+        // Test creating a City
+        City cityNotYetInDb = new City(
+                "The man",
+                "NYPD",
+                "3231232",
+                "Try me"
         );
 
         given()
                 .contentType(JSON)
-                .and().body(userNotYetInDb)
+                .and().body(cityNotYetInDb)
                 .when()
-                .post("http://localhost:8080/users")
+                .post("http://localhost:8080/citys")
                 .then()
                 .statusCode(is(200))
-                .and().body(containsString("new_user"));
+                .and().body(containsString("new_city"));
 
-        // Test get all Users
+        // Test get all Citys
         when()
-                .get("http://localhost:8080/users/")
+                .get("http://localhost:8080/citys/")
                 .then()
                 .statusCode(is(200))
                 .and().body(containsString("someone"))
                 .and().body(containsString("Else"))
                 .and().body(containsString("Yet Created"));
 
-        // Test finding one user by ID
+        // Test finding one city by ID
         when()
-                .get("http://localhost:8080/users/" + secondUser.getId())
+                .get("http://localhost:8080/citys/" + secondCity.getId())
                 .then()
                 .statusCode(is(200))
                 .and().body(containsString("Someone"))
                 .and().body(containsString("Else"));
 
-        // Test updating a user
-        secondUser.setFirstName("changed_name");
+        // Test updating a city
+        secondCity.setAgency_name("changed_name");
 
         given()
                 .contentType(JSON)
-                .and().body(secondUser)
+                .and().body(secondCity)
                 .when()
-                .patch("http://localhost:8080/users/" + secondUser.getId())
+                .patch("http://localhost:8080/citys/" + secondCity.getId())
                 .then()
                 .statusCode(is(200))
                 .and().body(containsString("changed_name"));
 
-        // Test deleting a user
+        // Test deleting a city
         when()
-                .delete("http://localhost:8080/users/" + secondUser.getId())
+                .delete("http://localhost:8080/citys/" + secondCity.getId())
                 .then()
                 .statusCode(is(200));
     }
