@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableEurekaClient
 @RestController
 public class CityApiApplication {
-
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+
+		SpringApplication.run(CityApiApplication.class, args);
 	}
 }

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "CITY")
-public class Record {
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Record {
     @Column(name = "SECTION_NAME")
     private String section_name;
 
-    public Record(String short_title, String agency_name, String request_id, String section_name) {
+    public City(String short_title, String agency_name, String request_id, String section_name) {
         this.short_title = short_title;
         this.agency_name = agency_name;
         this.request_id = request_id;

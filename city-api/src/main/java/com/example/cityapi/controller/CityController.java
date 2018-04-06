@@ -1,5 +1,4 @@
-package com.example.cityapi.controllers;
-
+package com.example.cityapi.controller;
 
 import com.example.cityapi.models.City;
 import com.example.cityapi.repositories.CityRepository;
@@ -8,42 +7,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import com.example.cityapi.models.city;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import java.util.ArrayList;
 
 @RestController
 public class CityController {
 
     @Autowired
-    private CityController cityRepository;
+    private CityRepository cityRepository;
 
+//    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/")
-    public Iterable<City> findAllCity() {
+    public Iterable<City> findAllUsers() {
         return cityRepository.findAll();
     }
 
+//    @GetMapping("/")
+//    public Iterable<City> findAllCity() {
+//        return cityRepository.findAll();
+//    }
+
     @GetMapping("/{cityId}")
     public City findCityById(@PathVariable Long cityId) throws NotFoundException {
+
         City foundCity = cityRepository.findOne(cityId);
+
         if (foundCity == null) {
             throw new NotFoundException("City with ID of " + cityId + " was not found!");
         }
 
         return foundCity;
     }
-//
-//    @GetMapping("/{userId}/requests")
-//    public ArrayList<String> findAllRequestsForUserId(@PathVariable long userId, @PathVariable String requestId) throws NotFoundException {
-//        User foundUser = userRepository.findOne(userId);
-//        if (foundUser == null) {
-//            throw new NotFoundException("User with ID of " + userId + " was not found!");
-//        }
-//        return foundUser.getRequestIds();
-//    }
 
     @DeleteMapping("/{cityId}")
     public HttpStatus deleteCityById(@PathVariable Long cityId) throws EmptyResultDataAccessException {
@@ -53,22 +53,23 @@ public class CityController {
 
     @PostMapping("/")
     public City createNewCity(@RequestBody City newCity) {
+
         return cityRepository.save(newCity);
     }
 
     @PatchMapping("/{cityId}")
     public City updateCityById(@PathVariable Long cityId, @RequestBody City cityRequest) throws NotFoundException {
-        City cityFromDb = CityRepository.findOne(cityId);
+        City cityFromDb = cityRepository.findOne(cityId);
 
         if (cityFromDb == null) {
             throw new NotFoundException("City with ID of " + cityId + " was not found!");
         }
 
 
-        cityFromDb.setTitle(cityRequest.getShort_Title());
-        cityFromDb.setAgency(cityRequest.getAgency_Name());
-        cityFromDb.setRequest(cityRequest.getRequest_Id());
-        cityFromDb.setSection(cityRequest.getSection_Name());
+        cityFromDb.setShort_title(cityRequest.getShort_title());
+        cityFromDb.setAgency_name(cityRequest.getAgency_name());
+        cityFromDb.setRequest_id(cityRequest.getRequest_id());
+        cityFromDb.setSection_name(cityRequest.getSection_name());
         return cityRepository.save(cityFromDb);
     }
 
@@ -87,3 +88,4 @@ public class CityController {
 
         response.sendError(HttpStatus.NOT_FOUND.value());
     }
+}

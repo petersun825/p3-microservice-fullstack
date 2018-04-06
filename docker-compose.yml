@@ -7,7 +7,7 @@ services:
         - '8761:8761'
       working_dir: /eureka-server
       volumes:
-        - ./eureka-server:/eureka-server:cached
+        - ./eureka-server:/eureka-server
       command: './gradlew bootRun'
       environment:
         - GRADLE_USER_HOME=cache
@@ -25,27 +25,13 @@ services:
       environment:
         - GRADLE_USER_HOME=cache
         - SPRING_PROFILES_ACTIVE=dev
-#  users-api:
-#      image: anapsix/alpine-java:8_jdk_unlimited
-#      ports:
-#        - '8081:8081'
-#      working_dir: /users-api
-#      volumes:
-#        - ./users-api:/users-api:cached
-#      depends_on:
-#        - postgresdev
-#        - eureka
-#      command: './gradlew bootRun'
-#      environment:
-#        - GRADLE_USER_HOME=cache
-#        - SPRING_PROFILES_ACTIVE=dev
   city-api:
       image: anapsix/alpine-java:8_jdk_unlimited
       ports:
         - '8081:8081'
       working_dir: /city-api
       volumes:
-        - ./users-api:/city-api:cached
+        - ./city-api:/city-api
       depends_on:
         - postgresdev
         - eureka
@@ -54,7 +40,7 @@ services:
         - GRADLE_USER_HOME=cache
         - SPRING_PROFILES_ACTIVE=dev
   postgresdev:
-      image: postgres
+      image: postgres:9.5-alpine
       ports:
         - "5432:5432"
       environment:

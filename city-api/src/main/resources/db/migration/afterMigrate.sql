@@ -1,6 +1,6 @@
-INSERT INTO BOOKS
+INSERT INTO CITY
         (SHORT_TITLE, AGENCY_NAME, REQUEST_ID, SECTION_NAME)
 VALUES
-        ('PROMOTED', 'FIRE DEPARTMENT', '332004', 'Changes in Personnel' ),
+        ('PROMOTED', 'FIRE DEPARTMENT', '332004', 'Changes in Personnel' )
 
 
