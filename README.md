@@ -9,7 +9,7 @@ full stack microservice application with backend and front end
 4. Check microservice is up and running.  Localhost:8761 - eureka server, localhost:8080: Zuul API gateway, localhost:8081: City Api gateway with Postgres Database.
 <br />
 REACT- Front End <br />
-5. download or git clone react-app respository <br />
+5. download or git clone react-app respository.  Link: https://github.com/petersun825/projectwk3-react <br />
 6. open terminal and access folder.<br />
 7. run 'npm start'<br />
 
