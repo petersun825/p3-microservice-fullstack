@@ -1,4 +1,4 @@
-## p3-microservice-fullstack -  New York City Human Resource Search Engine
+## p3-microservice-fullstack -  New York City Human Resource Open Data Website
 full stack microservice application with backend and front end 
   
   
@@ -7,7 +7,7 @@ full stack microservice application with backend and front end
 2. Open terminal and access folder.
 3. run 'docker-compose up'
 4. Check microservice is up and running.  Localhost:8761 - eureka server, localhost:8080: Zuul API gateway, localhost:8081: City Api gateway with Postgres Database.
-
+<br />
 REACT- Front End
 5. download or git clone react-app respository
 6. open terminal and access folder.
