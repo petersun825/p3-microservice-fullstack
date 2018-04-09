@@ -46,7 +46,7 @@ The other method is using the micro-service architecture which as gained popular
 Uber successfuly integrated microservice into their architecture and it has allowed the organization tremendous flexibility in manging their database and backend servers.  When they want to switch currency exchange services or change the code it doesn't have to affect their ride hailing back end or other back ends.  See article here for more detail: https://eng.uber.com/building-tincup/
 
 # Gif of application
-![application] https://thumbs.gfycat.com/MelodicMildAsianpiedstarling-size_restricted.gif
+![application] (https://media.giphy.com/media/9oIONyVij1MVyBIoBT/giphy.gif)
 
 # Reference(s)
 Goodman, David.J "With Largest Staff Ever, New York City Reimagines How It Works", June-15, 2017,  New York Times Online, url: https://www.nytimes.com/2017/06/15/nyregion/high-number-city-employees-bill-deblasio.html
